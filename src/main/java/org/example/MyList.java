@@ -9,39 +9,33 @@ import java.util.function.Function;
 public class MyList<T extends Number> implements Iterable<T> {
 
   private Object[] items;
-  private int size = 0;
+  private int size;
 
   public MyList() {
-    items = new Object[size];
+    size = 0;
+    items = new Object[10];
   }
 
-  //Метод добовляет элемент в массив
+  // Метод добовляет элемент в массив
   public void add(T item) {
-    if (size == items.length) {
+    if (size >= items.length) {
       resize();
     }
     items[size++] = item;
   }
 
-  //Метод для получения элемента из массива по индексу
-  public Object get(int index) {
-
+  // Метод для получения элемента из массива по индексу
+  public T get(int index) {
     if (index < 0 || index >= size) {
       throw new IndexOutOfBoundsException("Index out of range");
     }
-      return (T) items[index];
+    return (T) items[index];
   }
 
-  //Метод увеличивает массив если он заполнен
+  // Метод увеличивает массив если он заполнен
   private void resize() {
-    if (items.length == 0){
-      int newSize = items.length + 1 * 2;
-      items = Arrays.copyOf(items, newSize);
-    } else {
-      int newSize = items.length  * 2;
-      items = Arrays.copyOf(items, newSize);
-    }
-
+    int newSize = size * 2;
+    items = Arrays.copyOf(items, newSize);
   }
 
   //Метод удаляет элемент по индексу из массива
@@ -102,11 +96,8 @@ public class MyList<T extends Number> implements Iterable<T> {
   public boolean equals(Object o) {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
-
     MyList<?> otherList = (MyList<?>) o;
-
     if (size != otherList.size) return false;
-
     for (int i = 0; i < size; i++) {
       if (items[i] == null) {
         if (otherList.items[i] != null) return false;

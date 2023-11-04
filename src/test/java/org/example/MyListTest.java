@@ -134,9 +134,9 @@ public class MyListTest {
     MyList<Integer> mapList1 = myList.map(num -> num);
     Assertions.assertEquals(0, mapList1.size());
 
-    myList .add(1);
-    myList .add(2);
-    myList .add(3);
+    myList.add(1);
+    myList.add(2);
+    myList.add(3);
 
     MyList<Double> mapList = myList .map(num -> num * 1.0);
     Assertions.assertEquals(3, mapList.size());
